@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.pompelock.app",
+    "sha256_cert_fingerprints": [
+      "A0:B5:EE:59:A4:38:6A:5D:B5:E5:F0:6E:0B:30:FF:D8:E1:C7:21:E2:3F:AF:5D:70:50:4C:7A:DA:A9:38:F1:A4"
+    ]
+  }
+}]
