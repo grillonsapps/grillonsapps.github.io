@@ -141,7 +141,7 @@
         return;
       }
       // Custom scheme — ouvre l'app directement
-      var appUrl = 'movetounlockapp://invite?id=' + encodeURIComponent(id);
+      var appUrl = 'movetounlockapp://invite?token=' + encodeURIComponent(id);
       console.log('[INVITE PAGE] Generated app URL:', appUrl);
       window.location.href = appUrl;
 
