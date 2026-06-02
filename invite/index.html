@@ -109,10 +109,22 @@
   </div>
 
   <script>
+    // === LOGGING ===
+    var fullUrl = window.location.href;
     var params = new URLSearchParams(window.location.search);
+
+    console.log('[INVITE PAGE] Full URL:', fullUrl);
+    console.log('[INVITE PAGE] All params:', Array.from(params.entries()));
+    console.log('[INVITE PAGE] param "id":', params.get('id'));
+    console.log('[INVITE PAGE] param "token":', params.get('token'));
+
     var id = params.get('id') || params.get('token');  // Support both 'id' (legacy) and 'token' (new format)
     var u = params.get('u');
     var h = params.get('h');
+
+    console.log('[INVITE PAGE] Final id to use:', id);
+    console.log('[INVITE PAGE] username:', u);
+    console.log('[INVITE PAGE] hashtag:', h);
 
     if (u) {
       var tag = u + (h ? '#' + h : '');
@@ -121,16 +133,20 @@
     }
 
     function openApp() {
+      console.log('[INVITE PAGE] openApp() called, id:', id);
       if (!id) {
+        console.log('[INVITE PAGE] ERROR: no id found!');
         document.getElementById('error-msg').style.display = 'block';
         document.getElementById('error-msg').textContent = 'Lien invalide ou expiré.';
         return;
       }
       // Custom scheme — ouvre l'app directement
       var appUrl = 'movetounlockapp://invite?id=' + encodeURIComponent(id);
+      console.log('[INVITE PAGE] Generated app URL:', appUrl);
       window.location.href = appUrl;
 
       setTimeout(function() {
+        console.log('[INVITE PAGE] App did not open (timeout), showing error');
         document.getElementById('error-msg').style.display = 'block';
         document.getElementById('status-text').textContent =
           "Si l'app ne s'ouvre pas, vérifie qu'elle est installée.";
@@ -138,9 +154,11 @@
     }
 
     if (id) {
+      console.log('[INVITE PAGE] Valid token found, will open app');
       document.getElementById('status-text').textContent = "Ouverture de l'app…";
       setTimeout(openApp, 600);
     } else {
+      console.log('[INVITE PAGE] No valid token - showing error state');
       document.getElementById('error-msg').textContent = 'Lien invalide ou expiré.';
       document.getElementById('error-msg').style.display = 'block';
     }
